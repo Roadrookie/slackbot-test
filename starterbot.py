@@ -8,6 +8,38 @@ BOT_ID = os.environ.get("BOT_ID")
 # constants
 AT_BOT = "<@" + BOT_ID + ">"
 EXAMPLE_COMMAND = "do"
+startnew_windows = """>cd into project folder 
+`virtualenv env` - Here you are creating the virtual environment
+
+`env\scripts\\activate` - Here you are starting the virtual environment
+
+`pip install blah-blah` - When you run a pip install the added module will only be added to the virtual environment
+
+
+>create .gitignore file
+>
+>add env/ and .git to .gitignore file - By creating a .gitignore file you are telling git not to upload certain items in this case the folder env and the hidden .git folder 
+>
+>
+>
+># Pushing to github
+>
+>To start new blank github project
+>(from project folder)
+
+
+`git init` - Initiating Git in this directory
+
+`git add .` - Adding all the files and folders in your project folder to what git will be 
+
+`git commit -m "first commit"` - This is a message that describes what was changed before uploading
+
+`git remote add origin https://github.com/<username>/<repo-name>.git` - This is telling git where to upload to and giving it the nickname of \"orgin\" in this case
+
+`git push -u origin master` - This command is making the actual upload to the place and branch you specified (Here \"origin\" is the nickname of the place to upload and \"master\" is the branch)
+"""
+
+
 
 # instantiate Slack & Twilio clients
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
@@ -23,6 +55,9 @@ def handle_command(command, channel):
                "* command with numbers, delimited by spaces."
     if command.startswith(EXAMPLE_COMMAND):
         response = "Sure...write some more code then I can do that!"
+
+    if command.startswith("startproject windows"):
+    	response = startnew_windows
     slack_client.api_call("chat.postMessage", channel=channel,
                           text=response, as_user=True)
 
